@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cylinder Volume Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #calculator-container {
+            text-align: center;
+            margin: 50px auto;
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator-container">
+        <h2>Cylinder Volume Calculator</h2>
+        <label for="radius">Radius:</label>
+        <input type="number" id="radius" step="any" required>
+        <br>
+        <label for="height">Height:</label>
+        <input type="number" id="height" step="any" required>
+        <br>
+        <button id="calculate-btn">Calculate Volume</button>
+    </div>
+
+    <div id="result-container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const calculateBtn = document.getElementById("calculate-btn");
+            const resultContainer = document.getElementById("result-container");
+
+            calculateBtn.addEventListener("click", function() {
+                const radius = parseFloat(document.getElementById("radius").value);
+                const height = parseFloat(document.getElementById("height").value);
+
+                if (!isNaN(radius) && !isNaN(height)) {
+                    const volume = calculateVolume(radius, height);
+                    displayResult(volume);
+                } else {
+                    resultContainer.innerHTML = "Please enter valid numeric values for radius and height.";
+                }
+            });
+
+            function calculateVolume(radius, height) {
+                const pi = Math.PI;
+                const volume = radius * radius * pi * height;
+                return volume.toFixed(2);
+            }
+
+            function displayResult(volume) {
+                resultContainer.innerHTML = `The volume of the cylinder is: <strong>${volume} cubic units</strong>`;
+            }
+        });
+    </script>
+</body>
+</html>
